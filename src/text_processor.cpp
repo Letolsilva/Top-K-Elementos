@@ -15,7 +15,7 @@ void TextProcessor::init(const std::string &filename)
         return;
     }
 
-    std::string line; 
+    std::string line;
     StopWords("stopwords.txt");
 
     while (std::getline(inputFile, line))
@@ -49,7 +49,7 @@ void TextProcessor::StopWords(const std::string &stopWordsFilename)
         unoderedStopWords.insert(stopWord);
     }
 }
-void TextProcessor::tratamentos(std::string& word)
+void TextProcessor::tratamentos(std::string &word, bool &stringVazia)
 {
     if (!word.empty() && word.back() == '-')
     {
@@ -77,6 +77,9 @@ void TextProcessor::tratamentos(std::string& word)
     {
         word.erase(0, 3);
     }
+    if(word.empty()){
+        stringVazia=true;
+    }
 }
 void TextProcessor::tokenizacao(const std::string &line)
 {
@@ -88,17 +91,19 @@ void TextProcessor::tokenizacao(const std::string &line)
     while (iterador != fim)
     {
         word = iterador->str();
-        tratamentos(word);
-
-        for (char &c : word)
+        bool stringVazia = false;
+        tratamentos(word,stringVazia);
+        if (stringVazia == false)
         {
-            c = tolower(c);
+            for (char &c : word)
+            {
+                c = tolower(c);
+            }
+            if (unoderedStopWords.find(word) == unoderedStopWords.end())
+            {
+                wordCount[word]++;
+            }
         }
-        if (unoderedStopWords.find(word) == unoderedStopWords.end()) 
-        {
-            wordCount[word]++;
-        }
-
         ++iterador;
     }
     wordCount.erase("-");
@@ -117,7 +122,7 @@ void TextProcessor::topKWords(int k)
         if (topKHeapSize > k) // Manter o tamanho do vetor vectortopKHeap limitado a K
         {
             vectortopKHeap.erase(std::min_element(vectortopKHeap.begin(), vectortopKHeap.end(), [](const auto &a, const auto &b)
-                                            { return a.second < b.second; }));
+                                                  { return a.second < b.second; }));
             topKHeapSize--;
         }
     }
