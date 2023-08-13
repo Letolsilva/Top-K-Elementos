@@ -3,13 +3,13 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include "text_processor.hpp"
+#include "topKElementos.hpp"
 
-const int numFiles = 2; 
+int numFiles = 2; //Escolha a quantidade de arquivos de entrada
 
 int main() {
-    TextProcessor processor;
-    int k = 20;
+    topKItems processor;
+    int k = 20; //Escolha o valor de K
 
     for (int i = 1; i <= numFiles; ++i) {
         std::string filename = "data/input" + std::to_string(i) + ".txt";

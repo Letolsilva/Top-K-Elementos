@@ -1,5 +1,5 @@
-#ifndef TEXT_PROCESSOR_HPP
-#define TEXT_PROCESSOR_HPP
+#ifndef TOPKELEMENTOS_HPP
+#define TOPKELEMENTOS_HPP
 
 #include <string>
 #include <unordered_map>
@@ -7,7 +7,7 @@
 #include <vector>
 
 
-class TextProcessor {
+class topKItems {
 public:
     void init(const std::string& filename); 
     void printTopK(int k);

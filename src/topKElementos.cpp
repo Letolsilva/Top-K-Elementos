@@ -2,11 +2,11 @@
 #include <fstream>
 #include <sstream>
 #include <regex>
-#include "text_processor.hpp"
+#include "topKElementos.hpp"
 #include <queue>
 #include <algorithm>
 
-void TextProcessor::init(const std::string &filename)
+void topKItems::init(const std::string &filename)
 {
     std::ifstream inputFile(filename);
     if (!inputFile)
@@ -27,9 +27,10 @@ void TextProcessor::init(const std::string &filename)
     // {
     //     std::cout << entry.first << ": " << entry.second << std::endl;
     // }
+     inputFile.close();
 }
 
-void TextProcessor::StopWords(const std::string &stopWordsFilename)
+void topKItems::StopWords(const std::string &stopWordsFilename)
 {
     std::string fullPath = "data/" + stopWordsFilename;
     std::ifstream stopWordsFile(fullPath);
@@ -48,8 +49,9 @@ void TextProcessor::StopWords(const std::string &stopWordsFilename)
         }
         unoderedStopWords.insert(stopWord);
     }
+     stopWordsFile.close();
 }
-void TextProcessor::tratamentos(std::string &word, bool &stringVazia)
+void topKItems::tratamentos(std::string &word, bool &stringVazia)
 {
     if (!word.empty() && word.back() == '-')
     {
@@ -81,7 +83,7 @@ void TextProcessor::tratamentos(std::string &word, bool &stringVazia)
         stringVazia=true;
     }
 }
-void TextProcessor::tokenizacao(const std::string &line)
+void topKItems::tokenizacao(const std::string &line)
 {
     std::string word;
     std::regex wordRegex("[a-zA-Z0-9'À-Ÿ\\-“”]+");
@@ -110,16 +112,16 @@ void TextProcessor::tokenizacao(const std::string &line)
     wordCount.erase("—");
 }
 
-void TextProcessor::topKWords(int k)
+void topKItems::topKWords(int k)
 {
-    int topKHeapSize = 0; // Variável inteira para armazenar o tamanho do vectortopKHeap
+    int topKHeapSize = 0; 
 
     for (const auto &entry : wordCount)
     {
         vectortopKHeap.push_back(entry);
         topKHeapSize++;
 
-        if (topKHeapSize > k) // Manter o tamanho do vetor vectortopKHeap limitado a K
+        if (topKHeapSize > k) 
         {
             vectortopKHeap.erase(std::min_element(vectortopKHeap.begin(), vectortopKHeap.end(), [](const auto &a, const auto &b)
                                                   { return a.second < b.second; }));
@@ -136,7 +138,6 @@ void TextProcessor::topKWords(int k)
         heapify(vectortopKHeap, k, i);
     }
 
-    // Extraindo os K maiores elementos do heap máximo de tamanho K
     for (int i = 0; i < k; ++i)
     {
         std::swap(vectortopKHeap.front(), vectortopKHeap[k - i - 1]);
@@ -144,11 +145,9 @@ void TextProcessor::topKWords(int k)
     }
 }
 
-void TextProcessor::printTopK(int k)
+void topKItems::printTopK(int k)
 {
     std::cout << "\nTop " << k << " maiores valores encontrados na hash (frequências) e suas respectivas palavras em ordem crescente:\n";
-    // std::cout<<"aaaaaaaa"<<vectortopKHeap.size();
-    // int numWordsToPrint = std::min(k, static_cast<int>(vectortopKHeap.size())); // Determina quantas palavras imprimir
     int aux = vectortopKHeap.size();
     for (int i = 0; i < aux; ++i)
     {
@@ -156,7 +155,7 @@ void TextProcessor::printTopK(int k)
     }
 }
 
-void TextProcessor::heapify(std::vector<std::pair<std::string, int>> &vectorAux, int n, int i)
+void topKItems::heapify(std::vector<std::pair<std::string, int>> &vectorAux, int n, int i)
 {
     int largest = i;
     int left_child = 2 * i + 1;
