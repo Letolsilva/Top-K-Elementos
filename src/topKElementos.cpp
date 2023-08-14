@@ -118,16 +118,20 @@ void topKItems::topKWords(int k)
 
     for (const auto &entry : wordCount)
     {
-        vectortopKHeap.push_back(entry);
         topKHeapSize++;
 
         if (topKHeapSize > k) 
         {
-            vectortopKHeap.erase(std::min_element(vectortopKHeap.begin(), vectortopKHeap.end(), [](const auto &a, const auto &b)
-                                                  { return a.second < b.second; }));
-            topKHeapSize--;
+            if (entry.second > vectortopKHeap[0].second)
+            {
+                vectortopKHeap[0] = entry;
+                heapify(vectortopKHeap, k, 0);
+            }
+        }else{
+             vectortopKHeap.push_back(entry);
         }
     }
+
     if (topKHeapSize < k)
     {
         k = topKHeapSize;
@@ -138,12 +142,14 @@ void topKItems::topKWords(int k)
         heapify(vectortopKHeap, k, i);
     }
 
-    // for (int i = 0; i < k; ++i)
+    // // Reorganizar os elementos dentro do heap usando heapify
+    // for (int i = k - 1; i > 0; --i)
     // {
-    //     std::swap(vectortopKHeap.front(), vectortopKHeap[k - i - 1]);
-    //     heapify(vectortopKHeap, k - i - 1, 0);
+    //     std::swap(vectortopKHeap[0], vectortopKHeap[i]);
+    //     heapify(vectortopKHeap, i, 0);
     // }
 }
+
 
 void topKItems::printTopK(int k)
 {
@@ -161,12 +167,12 @@ void topKItems::heapify(std::vector<std::pair<std::string, int>> &vectorAux, int
     int left_child = 2 * i + 1;
     int right_child = 2 * i + 2;
 
-    if (left_child < n && vectorAux[left_child].second > vectorAux[largest].second)
+    if (left_child < n && vectorAux[left_child].second < vectorAux[largest].second)
     {
         largest = left_child;
     }
 
-    if (right_child < n && vectorAux[right_child].second > vectorAux[largest].second)
+    if (right_child < n && vectorAux[right_child].second < vectorAux[largest].second)
     {
         largest = right_child;
     }
@@ -176,4 +182,5 @@ void topKItems::heapify(std::vector<std::pair<std::string, int>> &vectorAux, int
         std::swap(vectorAux[i], vectorAux[largest]);
         heapify(vectorAux, n, largest);
     }
+    
 }
