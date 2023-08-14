@@ -144,7 +144,7 @@ Esse código possui um arquivo Makefile que realiza todo o procedimento de compi
 ## ✔️Referências
 https://builtin.com/software-engineering-perspectives/heapify-heap-tree-cpp
 https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/
-https://github.com/mpiress/HeapSort.git
+https://github.com/mpiress/HeapSort.git <br>
 https://devdojo.com/algonoob/max-heap
 
 ## Contato
