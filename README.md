@@ -142,10 +142,10 @@ Esse código possui um arquivo Makefile que realiza todo o procedimento de compi
 |  `make run`            | Executa o programa da pasta build após a realização da compilação                                 |
 
 ## ✔️Referências
-https://builtin.com/software-engineering-perspectives/heapify-heap-tree-cpp
-https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/
+https://builtin.com/software-engineering-perspectives/heapify-heap-tree-cpp <br>
+https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/ <br>
 https://github.com/mpiress/HeapSort.git <br>
-https://devdojo.com/algonoob/max-heap
+https://devdojo.com/algonoob/max-heap <br>
 
 ## Contato
 
