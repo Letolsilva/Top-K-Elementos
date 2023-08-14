@@ -138,11 +138,11 @@ void topKItems::topKWords(int k)
         heapify(vectortopKHeap, k, i);
     }
 
-    for (int i = 0; i < k; ++i)
-    {
-        std::swap(vectortopKHeap.front(), vectortopKHeap[k - i - 1]);
-        heapify(vectortopKHeap, k - i - 1, 0);
-    }
+    // for (int i = 0; i < k; ++i)
+    // {
+    //     std::swap(vectortopKHeap.front(), vectortopKHeap[k - i - 1]);
+    //     heapify(vectortopKHeap, k - i - 1, 0);
+    // }
 }
 
 void topKItems::printTopK(int k)
