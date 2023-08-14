@@ -27,14 +27,14 @@ Este programa em C++ foi criado como parte do curso de Algoritmos e Estruturas d
 
 ## 💻Objetivos
 
-O propósito deste projeto é construir uma tabela de dispersão (hash) para registrar a frequência de cada elemento tokenizado na coleção de dados de entrada. Além disso, visa-se criar uma árvore de prioridades (heap) com capacidade para k elementos, na qual os primeiros k elementos da tabela de dispersão são inseridos.
+O propósito deste projeto é construir uma tabela de dispersão (hash) para registrar a frequência de cada elemento tokenizado na coleção de dados de entrada. Além disso, visa-se criar uma árvore (heap) com capacidade para k elementos mais frequentes no texto.
 
 <strong><h4>Condições impostas: </h4></strong>
 - Inicialmente, este código realiza a leitura de um arquivo de entrada denominado ```data/input(x).txt```. O arquivo contém o texto que será submetido à análise. No contexto, o valor de x é o valor de uma variável ajustável no início do arquivo ```main```, denominada numFiles. Por exemplo, se houver a necessidade de processar dois arquivos de entrada, os nomes dos arquivos seriam data/input1.txt e data/input2.txt, e assim sucessivamente, de acordo com a quantidade de arquivos definida na variável numFiles. Lembrando que ```data``` é a pasta criada para os arquivos de entrada.
 - As sentenças são definidas pelos sinais de pontuação (".", "?", "!").
 - Cada parágrafo é separado por uma linha em branco.
 - Existe um arquivo de ```stop words``` para análise. Sendo as stop words artigos e conjunções que podem ser alteradas de acordo com a preferência do usuário. As palavras presentes neste arquivo serão desconsideradas da contagem das top k palavras.
-- Ao término da execução, a estrutura de heap conterá os k elementos com os maiores valores (frequências) na coleção de dados. Posteriormente, esses elementos são impressos em ordem crescente no terminal.
+- Ao término da execução, a estrutura de heap conterá os k elementos com os maiores valores (frequências) na coleção de dados. Posteriormente, esses elementos são impressos na ordem que se encontram no heap.
 - Há somente uma saída no terminal, a qual é a combinação das palavras mais frequentemente encontradas em todos os textos fornecidos como entrada.
 
 
@@ -51,15 +51,35 @@ Visando encontrar uma solução eficiente e rápida para resolução do problema
 
 <h3><b>Unodered_map</b></h3>
 
-Emprega uma tabela de hash para armazenar as palavras e suas frequencias, resultando em inserções e buscas rápidas com complexidade média de O(1). Isso é benéfico quando é crucial ter acesso veloz, tornando possível utilizar palavras como chaves para contabilizar suas frequências.
+`std:unordered_map` é um contêiner associativo que contém pares chave-valor com chaves exclusivas. Pesquisa, inserção e remoção de elementos têm complexidade de tempo constante média. Internamente, os elementos não são classificados em nenhuma ordem específica, mas organizados em baldes. Em qual balde um elemento é colocado depende inteiramente do hash de sua chave. Chaves com o mesmo código hash aparecem no mesmo bucket. Isso permite acesso rápido a elementos individuais, pois uma vez que o hash é calculado, ele se refere ao balde exato em que o elemento é colocado.
+
+Neste código emprega se uma tabela de hash para armazenar as palavras e suas frequencias, resultando em inserções e buscas rápidas com complexidade média de O(1). Isso é benéfico quando é crucial, pois torna possível utilizar palavras como chaves para contabilizar suas frequências e acessa-las para obter as top K elementos.
 
 <h3><b>Unodered_set</b></h3>
 
-É um contêiner associativo não ordenado implementado usando uma tabela de hash onde as chaves são divididas em índices de uma tabela de hash para que a inserção seja sempre aleatória, foi utilizado para armazenar as StopWords. Todas as operações no unordered_set levam tempo constante O(1) em uma média que pode ir até o tempo linear O(n) no pior caso, 
+`std::unordered_set` é um contêiner associativo que contém um conjunto de objetos exclusivos do tipo Key. Pesquisa, inserção e remoção têm complexidade de tempo constante média. Internamente, os elementos não são classificados em nenhuma ordem específica, mas organizados em baldes. Em qual balde um elemento é colocado depende inteiramente do hash de seu valor. Isso permite acesso rápido a elementos individuais, pois uma vez que um hash é calculado, ele se refere ao balde exato em que o elemento é colocado.
 
-<h3><b>Heapify_máx</b></h3>
+Os elementos do contêiner não podem ser modificados (mesmo por não const iteradores), pois a modificação pode alterar o hash de um elemento e corromper o contêiner. Portanto, optou-se por armazenar as stopWords, que foram carregadas de um arquivo de texto. Essa abordagem permite uma comparação otimizada para determinar se palavras são stopwords ou não. Isso se deve ao fato de que todas as operações no unordered_set têm uma complexidade de tempo constante em média (O(1)), embora em casos extremos possam chegar a uma complexidade de tempo linear (O(n)).
 
-Especificamente, max heapify é o processo de pegar uma matriz que é representada como uma árvore binária e registrar os valores em cada nó, de modo que os nós filhos sejam menores ou iguais ao pai, satisfazendo um heap máximo. Dessa forma, conseguimos armazenas as `k` palavras mais frequentes nos textos. Heapify um único nó leva complexidade de tempo O(log N), onde N é o número total de nós. Portanto, construir todo o Heap levará N operações de heapify e a complexidade de tempo total será O(N*logN).
+<h3><b>Heapify_min</b></h3>
+
+Heapify é um método de converter um conjunto de valores em um heap. A lógica por trás do algoritmo heapify determinará em que tipo de heap o conjunto de valores se tornará.
+
+Neste algoritmo foi utilizado o heapify_min, que é uma Árvore Binária Completa contendo o menor valor no nó raiz, seguido por valores maiores no próximo nível, seguido por valores ainda maiores no próximo nível e assim por diante. Assim, o último nível desta árvore binária deve conter os maiores valores presentes no array de valores que estamos inserindo. Neste código, um heap é utilizado para armazenar palavras e suas frequências dos K maiores elementos dos textos lidos. No entanto, é importante observar que, entre esses K maiores elementos, o menor deles é mantido no nó raiz. 
+Imagine que o vetor contém as maiores frequências encontradas, o heap fica assim:
+<div align="center">
+<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/de15ef20-39f3-4be0-8364-93eb9306bb63" width="500px" />
+</div>
+
+
+
+Min heapify é o processo de registrar os valores em cada nó de forma que o filho seja maior ou igual ao nó pai, satisfazendo um heap mínimo:
+<div align="center">
+<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/f2ea3fef-a6c3-49be-b079-ee6cd8075f16" width="500px" />
+</div>
+
+
+Heapify um único nó leva complexidade de tempo O(log N), onde N é o número total de nós. Portanto, construir todo o Heap levará N operações de heapify e a complexidade de tempo total será O(N*logN).
 
 
 ## 🔨 Funções 
