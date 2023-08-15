@@ -63,23 +63,23 @@ Os elementos do contêiner não podem ser modificados (mesmo por não const iter
 
 <h3><b>Heapify_min</b></h3>
 
-Heapify é um método de converter um conjunto de valores em um heap. A lógica por trás do algoritmo heapify determinará em que tipo de heap o conjunto de valores se tornará.
+`Heapify` é um método de converter um conjunto de valores em um heap. A lógica por trás do algoritmo heapify determinará em que tipo de heap o conjunto de valores se tornará.
 
 Neste algoritmo foi utilizado o heapify_min, que é uma Árvore Binária Completa contendo o menor valor no nó raiz, seguido por valores maiores no próximo nível, seguido por valores ainda maiores no próximo nível e assim por diante. Assim, o último nível desta árvore binária deve conter os maiores valores presentes no array de valores que estamos inserindo. Neste código, um heap é utilizado para armazenar palavras e suas frequências dos K maiores elementos dos textos lidos. No entanto, é importante observar que, entre esses K maiores elementos, o menor deles é mantido no nó raiz. 
 Imagine que o vetor contém as maiores frequências encontradas, o heap fica assim:
 <div align="center">
 <img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/de15ef20-39f3-4be0-8364-93eb9306bb63" width="500px" />
 </div>
-
-
-
-Min heapify é o processo de registrar os valores em cada nó de forma que o filho seja maior ou igual ao nó pai, satisfazendo um heap mínimo:
-<div align="center">
-<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/f2ea3fef-a6c3-49be-b079-ee6cd8075f16" width="500px" />
-</div>
-
+É possível acessar os filhos esquerdo e direito de um nó através das fórmulas 2 * i + 1 e 2 * i + 2, respectivamente.<br>
+Obs: i recebeu o nome de subtree_root_index neste código.
 
 Heapify um único nó leva complexidade de tempo O(log N), onde N é o número total de nós. Portanto, construir todo o Heap levará N operações de heapify e a complexidade de tempo total será O(N*logN).
+
+<h3><b>Regex</b></h3>
+
+Uma `expressão regular`, também conhecida como regex, é uma sequência de caracteres que define um padrão de busca específico. Isso pode ser usado em algoritmos de pesquisa de strings, localização ou substituição, entre outros. As regex também são empregadas para validar entradas.
+
+O `std::regex_iterator` é um iterador somente leitura que permite acessar correspondências individuais de uma expressão regular dentro de uma sequência de caracteres. O iterador é construído com base no padrão da expressão regular. Quando um std::regex_iterator válido é incrementado após ter alcançado a última correspondência (quando std::regex_search retorna falso), ele se torna igual ao iterador de fim de sequência. No entanto, ao desreferenciar ou incrementar ainda mais esse iterador, ocorre um comportamento indefinido.
 
 
 ## 🔨 Funções 
@@ -93,28 +93,21 @@ Heapify um único nó leva complexidade de tempo O(log N), onde N é o número t
 
 - ```Tokenizacao:``` Essa função transforma as linhas do texto em palavras individuais. Para isso, ela aplica o regex para identificar padrões de palavras, incluindo letras, números, apóstrofos, caracteres acentuados e hifens. Durante o processo, a função itera através dos resultados obtidos pelo regex e aplica a funçao ```tratamentos```. Se a palavra resultante não estiver vazia após os tratamentos, ela é convertida para minúsculas e verifica-se se não é uma ```StopWords```. Caso não seja uma, ela é contabilizada no unordered_map chamado ```wordCount```, para posteriormente calcular a frequência das palavras no texto. 
 
-- ```topKWords:``` Desempenha um papel crucial na identificação das palavras mais frequentes no texto, usando uma abordagem baseada em heap. Ela percorre o unordered_map chamado ```wordCount```, que armazena as palavras e suas respectivas contagens de frequência. À medida que percorre esse mapa, a função insere cada par chave-valor em um vetor chamado ``vectortopKHeap``. Essa etapa inicial é acompanhada pelo gerenciamento do tamanho do vetor para garantir que ele não exceda o valor de k, que é o número desejado de palavras mais frequentes a serem encontradas. Se o tamanho do vetor `vectortopKHeap` ultrapassar o limite k, a função remove o elemento de menor contagem de frequência usando uma função lambda junto com min_element. Em seguida, a função procede a uma etapa de construção do heap máximo usando a função heapify, onde os elementos são reorganizados para que as maiores contagens de frequência ocupem as posições superiores. A última parte da função envolve a extração dos k elementos de maior valor do heap máximo.
+- ```topKWords:``` A função desempenha um papel central na identificação das palavras mais frequentes no texto, usando uma abordagem baseada em heap. Durante a iteração pelo mapa não ordenado chamado `wordCount`, que mantém as palavras e suas contagens, essa função constrói um heap. O objetivo é armazenar os "k" elementos com as maiores contagens. A cada iteração, ela verifica se um novo elemento tem uma contagem maior do que o elemento de menor contagem no heap, e, se essa condição for verdadeira, substitui o elemento mínimo e, em seguida, reorganiza o heap para manter a propriedade de heap. Ao final do processamento, o heap é montado de forma inicial, contendo os "k" elementos de maior contagem, permitindo identificar eficientemente as palavras mais frequentes no texto.
 
-- ```heapify:``` Ao receber um vetor de pares (cada par representando uma palavra e sua contagem de frequência) juntamente com um índice i, a função avalia os elementos nos índices correspondentes às posições dos filhos esquerdo e direito no heap. Ela determina qual desses filhos tem a maior contagem de frequência e, se essa contagem for maior do que a contagem do elemento no índice i, realiza uma troca entre esses elementos. Isso garante que o elemento na posição i seja maior do que seus filhos, mantendo a propriedade do heap máximo. A função, então, é chamada recursivamente para o filho que teve sua posição trocada, garantindo que a propriedade do heap máximo seja mantida em todas as etapas da construção e manipulação do heap.
+- ```heapify:``` Ela recebe como entrada um vetor de pares representando palavras e suas contagens, o tamanho do heap (n) e o índice da raiz da subárvore sendo analisada. A função compara as contagens dos elementos presentes no índice da raiz e seus filhos esquerdo e direito, identificando o menor entre eles. Se o menor não for a raiz da subárvore, a função troca os elementos e chama recursivamente heapify na subárvore afetada, assegurando que a hierarquia e a propriedade de heap mínima sejam mantidas em toda a estrutura. 
 
-
-
-<div align="center">
-<img src="https://github.com/Letolsilva/Labirinto-Recorrente/assets/109817570/5526e951-28a0-4581-b269-52026a1bf3d1" alt="heapify max" style="width:500px;height:300px;">
-</div>
-
-
-- ```printTopK:``` Imprime as palavras e suas frequencias em ordem crescente.
+- ```printTopK:``` Imprime as palavras e suas frequências na ordem que esta no heap.
 
 
 ## 🎯Resultados
 
 <h3><b>Configurando</b></h3>
 <div align="center">
-<img src="https://github.com/Letolsilva/Labirinto-Recorrente/assets/109817570/05509ca3-087b-490f-8460-3170da1e368f" width="500px" />
+<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/208e52e6-f803-4895-a435-490c49f9fe97" width="500px" />
 </div>
 
-Configurando para ler apenas um arquivo usando a variável ```numFiles``` e a variável  ```k``` para selecionar os top 20 elementos.
+Configurando para ler apenas um arquivo usando a variável ```numFiles``` e a variável  ```k``` para selecionar os top 20 elementos, no arquivo `main.cpp`.
 
 <h3><b>Entrada</b></h3>
 <div align="center">
@@ -123,29 +116,34 @@ Configurando para ler apenas um arquivo usando a variável ```numFiles``` e a va
 
 <h3><b>Saída</b></h3>
 <div align="center">
-<img src="https://github.com/Letolsilva/Labirinto-Recorrente/assets/109817570/34c50d87-5b73-44bd-9b7e-917fdf283994" width="500px" />
+<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/b27e321f-c84b-4907-9d3d-816240d57293" width="500px" />
 </div>
 
 <h3><b>Saída com os dois textos fornecidos como testes</b></h3>
 <div align="center">
-<img src="https://github.com/Letolsilva/Labirinto-Recorrente/assets/109817570/55244c4e-7955-4901-b1f8-227e098bcc5c" width="500px" />
+<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/61cad8ff-77ca-4b37-9b3c-0e6a06edfd84" width="500px" />
 </div>
-A saída obtida é resultado da fusão das palavras mais comuns encontradas nos textos "Dom Casmurro" e "A semana Texto-fonte: Obra Completa de Machado de Assis", ambos fornecidos como entradas de teste pelo professor e presentes nos arquivos "input1.txt" e "input2.txt", localizados na pasta data deste código.
+A saída obtida é resultado da fusão das palavras mais comuns encontradas nos textos "Dom Casmurro" e "A semana Texto-fonte: Obra Completa de Machado de Assis", ambos fornecidos como entradas de teste pelo professor e presentes nos arquivos "input1.txt" e "input2.txt", localizados na pasta data deste código.<br>
+
+Pode-se confirmar que as sáidas estão corretas analisando os filhos esquerdos e direitos, com 2 * i + 1 e 2 * i + 2.<br>
+Obs: Novamente i recebeu o nome de subtree_root_index neste codigo.
+
 
 <h3><b>Tempo de execução</b></h3>
-
-
-<h3><b>Custo assintotico</b></h3>
+O código foi executado em um notebook Acer Nitro 5 com processador Ryzen 7.
+<div align="center">
+<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/5bc326ce-66a9-4398-a6f3-d6345201b159" width="200px" />
+</div>
 
 
 ## ✔️Conclusão
-Foi observado, um novo metodo mais otimizado para busca e pesquisa em textos e que podem ser tambem aplicado em diversas outras situaçoes. O heaps tendem a utilizar estruturas abstratas de dados cujas ações o permitem definir uma hierarquia em árvore dos elementos armazenados, e acessa-los de forma rápida.Além disso, consegui iniciar minha compreensão das estruturas de árvores e também apliquei no algoritmo outros conhecimentos que desenvolvi. Introduzi novas funções e estruturas que me proporcionaram abordagens mais avançadas para realizar as mesmas tarefas.
+Foi observado, um novo metodo mais otimizado para busca e pesquisa em textos e que podem ser tambem aplicado em diversas outras situações. Entender sobre o heap que tende a utilizar estruturas abstratas de dados cujas ações o permitem definir uma hierarquia em árvore dos elementos armazenados, e acessa-los de forma rápida. Além disso, consegui iniciar minha compreensão das estruturas de árvores e também apliquei no algoritmo outros conhecimentos que desenvolvi. Introduzi novas funções e estruturas que me proporcionaram abordagens mais avançadas para realizar as mesmas tarefas.
 
 ## 🚨Importante
 
-- Antes de compilar o código, é essencial definir dois parâmetros no arquivo main.cpp localizados no início do código: o valor de k (linha 12), que representa o tamanho do heap, e o número de arquivos que serão lidos numFiles (linha 8). 
+- Antes de compilar o código, é essencial definir dois parâmetros no arquivo main.cpp localizados no início do código: o valor de `k` (linha 12), que representa o tamanho do heap, e o número de arquivos que serão lidos numFiles (linha 8). 
 
-- Certifique-se de ter os textos desejados armazenados na pasta data, nomeados como input(numero do arquivo).txt, sendo que o número do arquivo deve começar a partir de 1 e incrementar sequencialmente. Na função main, escolha o número adequado de arquivos a serem lidos.
+- Certifique-se de ter os textos desejados armazenados na pasta data, nomeados como input(numero do arquivo).txt, sendo que o número do arquivo deve começar a partir de 1 e incrementar sequencialmente. Na pasta main, escolha o número adequado de arquivos a serem lidos.
 
 - O programa fornecerá uma única saída, apresentando as palavras mais frequentes encontradas nos arquivos especificados pelo parâmetro numFiles. Isso permitirá uma análise eficiente das palavras mais recorrentes nos textos fornecidos.
 

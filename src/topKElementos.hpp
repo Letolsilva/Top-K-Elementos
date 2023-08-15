@@ -24,7 +24,7 @@ private:
 
     void tokenizacao(const std::string& line);
     void StopWords(const std::string& stopWordsFilename);
-    void heapify(std::vector<std::pair<std::string, int>>& arr, int n, int i);
+    void heapify(std::vector<std::pair<std::string, int>>& arr, int n, int subtree_root_index);
     void tratamentos(std::string& word, bool& stringVazia);
 
 };

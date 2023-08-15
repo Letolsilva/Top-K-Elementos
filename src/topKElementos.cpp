@@ -161,26 +161,26 @@ void topKItems::printTopK(int k)
     }
 }
 
-void topKItems::heapify(std::vector<std::pair<std::string, int>> &vectorAux, int n, int i)
+void topKItems::heapify(std::vector<std::pair<std::string, int>> &vectorAux, int n, int subtree_root_index)
 {
-    int largest = i;
-    int left_child = 2 * i + 1;
-    int right_child = 2 * i + 2;
+    int minimum = subtree_root_index;
+    int left_child = 2 * subtree_root_index + 1;
+    int right_child = 2 * subtree_root_index + 2;
 
-    if (left_child < n && vectorAux[left_child].second < vectorAux[largest].second)
+    if (left_child < n && vectorAux[left_child].second < vectorAux[minimum].second)
     {
-        largest = left_child;
+        minimum = left_child;
     }
 
-    if (right_child < n && vectorAux[right_child].second < vectorAux[largest].second)
+    if (right_child < n && vectorAux[right_child].second < vectorAux[minimum].second)
     {
-        largest = right_child;
+        minimum = right_child;
     }
 
-    if (largest != i)
+    if (minimum != subtree_root_index)
     {
-        std::swap(vectorAux[i], vectorAux[largest]);
-        heapify(vectorAux, n, largest);
+        std::swap(vectorAux[subtree_root_index], vectorAux[minimum]);
+        heapify(vectorAux, n, minimum);
     }
     
 }
