@@ -153,7 +153,7 @@ void topKItems::topKWords(int k)
 
 void topKItems::printTopK(int k)
 {
-    std::cout << "\nTop " << k << " maiores valores encontrados na hash (frequências) e suas respectivas palavras em ordem crescente:\n";
+    std::cout << "\nTop " << k << " maiores Elementos encontrados \n";
     int aux = vectortopKHeap.size();
     for (int i = 0; i < aux; ++i)
     {
