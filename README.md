@@ -1,7 +1,7 @@
 <h1 align="center" font-size="200em"><b>Top K elementos</b></h1>
 
 <div align = "center" >
-<!-- imagem -->
+
 
 [![requirement](https://img.shields.io/badge/IDE-Visual%20Studio%20Code-informational)](https://code.visualstudio.com/docs/?dv=linux64_deb)
 ![Make](https://img.shields.io/badge/Compilacao-Make-orange)
@@ -55,6 +55,11 @@ Visando encontrar uma solução eficiente e rápida para resolução do problema
 
 Neste código emprega se uma tabela de hash para armazenar as palavras e suas frequencias, resultando em inserções e buscas rápidas com complexidade média de O(1). Isso é benéfico quando é crucial, pois torna possível utilizar palavras como chaves para contabilizar suas frequências e acessa-las para obter as top K elementos.
 
+A interface engloba uma função bucket_count que opera em tempo constante. Além disso, apresenta outra função chamada bucket_size, cujo desempenho está linearmente relacionado ao tamanho do balde.
+
+Essencialmente, essas características descrevem a implementação do método de tratamento de colisões por encadeamento. Ao adotar o encadeamento de colisões, a satisfação de todos os requisitos torna-se uma tarefa relativamente fácil e direta. A função bucket_count() retorna o número de elementos presentes na estrutura de dados, enquanto a função bucket_size() retorna o número de elementos na lista de colisões associada a cada balde. A obtenção desses valores em tempo constante e linear, respectivamente, é uma operação simples e direta.
+
+
 <h3><b>Unodered_set</b></h3>
 
 `std::unordered_set` é um contêiner associativo que contém um conjunto de objetos exclusivos do tipo Key. Pesquisa, inserção e remoção têm complexidade de tempo constante média. Internamente, os elementos não são classificados em nenhuma ordem específica, mas organizados em baldes. Em qual balde um elemento é colocado depende inteiramente do hash de seu valor. Isso permite acesso rápido a elementos individuais, pois uma vez que um hash é calculado, ele se refere ao balde exato em que o elemento é colocado.
@@ -77,9 +82,16 @@ Heapify um único nó leva complexidade de tempo O(log N), onde N é o número t
 
 <h3><b>Regex</b></h3>
 
-Uma `expressão regular`, também conhecida como regex, é uma sequência de caracteres que define um padrão de busca específico. Isso pode ser usado em algoritmos de pesquisa de strings, localização ou substituição, entre outros. As regex também são empregadas para validar entradas.
+A biblioteca de expressões regulares disponibiliza uma classe que representa as próprias expressões regulares, que são uma forma de minilinguagem utilizada para realizar a correspondência de padrões em strings.
 
-O `std::regex_iterator` é um iterador somente leitura que permite acessar correspondências individuais de uma expressão regular dentro de uma sequência de caracteres. O iterador é construído com base no padrão da expressão regular. Quando um std::regex_iterator válido é incrementado após ter alcançado a última correspondência (quando std::regex_search retorna falso), ele se torna igual ao iterador de fim de sequência. No entanto, ao desreferenciar ou incrementar ainda mais esse iterador, ocorre um comportamento indefinido.
+Uma "expressão regular", também conhecida como `regex`, é uma sequência específica de caracteres que define um padrão de pesquisa. Isso pode ser empregado em algoritmos de busca, localização ou substituição de strings, entre outras aplicações. Expressões regulares também são utilizadas para validar entradas.
+
+Os iteradores regex são usados ​​para percorrer todo o conjunto de correspondências de expressões regulares encontradas em uma sequência.
+O `std::regex_iterator` é um iterador somente leitura que permite acessar correspondências individuais de uma expressão regular dentro de uma sequência de caracteres. 
+
+Durante a construção e em cada incremento, esse iterador chama a função std::regex_search e armazena o resultado (ou seja, guarda uma cópia do valor de std::match_results < BidirIt >). O primeiro objeto desse tipo pode ser lido no momento da construção do iterador ou quando ocorre a primeira operação de desreferenciamento. Caso contrário, a desreferenciação apenas retorna uma cópia da correspondência de expressão regular mais recentemente obtida.
+
+O padrão utilizado na construção do std::regex_iterator representa o indicador do final da sequência. Quando um std::regex_iterator válido é incrementado após ter alcançado a última correspondência (ou seja, quando std::regex_search retorna false), ele se iguala ao iterador que denota o final da sequência.
 
 
 ## 🔨 Funções 

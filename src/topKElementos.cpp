@@ -120,15 +120,15 @@ void topKItems::topKWords(int k)
     {
         topKHeapSize++;
 
-        if (topKHeapSize > k) 
+        if (topKHeapSize <= k) 
         {
-            if (entry.second > vectortopKHeap[0].second)
-            {
-                vectortopKHeap[0] = entry;
-                heapify(vectortopKHeap, k, 0);
-            }
-        }else{
-             vectortopKHeap.push_back(entry);
+            vectortopKHeap.push_back(entry);
+            heapify(vectortopKHeap, topKHeapSize, 0);
+        }
+        else if (entry.second > vectortopKHeap[0].second)
+        {
+            vectortopKHeap[0] = entry;
+            heapify(vectortopKHeap, k, 0);
         }
     }
 
