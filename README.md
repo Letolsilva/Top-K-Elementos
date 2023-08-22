@@ -66,20 +66,6 @@ Essencialmente, essas características descrevem a implementação do método de
 
 Os elementos do contêiner não podem ser modificados (mesmo por não const iteradores), pois a modificação pode alterar o hash de um elemento e corromper o contêiner. Portanto, optou-se por armazenar as stopWords, que foram carregadas de um arquivo de texto. Essa abordagem permite uma comparação otimizada para determinar se palavras são stopwords ou não. Isso se deve ao fato de que todas as operações no unordered_set têm uma complexidade de tempo constante em média (O(1)), embora em casos extremos possam chegar a uma complexidade de tempo linear (O(n)).
 
-<h3><b>Heapify_min</b></h3>
-
-`Heapify` é um método de converter um conjunto de valores em um heap. A lógica por trás do algoritmo heapify determinará em que tipo de heap o conjunto de valores se tornará.
-
-Neste algoritmo foi utilizado o heapify_min, que é uma Árvore Binária Completa contendo o menor valor no nó raiz, seguido por valores maiores no próximo nível, seguido por valores ainda maiores no próximo nível e assim por diante. Assim, o último nível desta árvore binária deve conter os maiores valores presentes no array de valores que estamos inserindo. Neste código, um heap é utilizado para armazenar palavras e suas frequências dos K maiores elementos dos textos lidos. No entanto, é importante observar que, entre esses K maiores elementos, o menor deles é mantido no nó raiz. 
-Imagine que o vetor contém as maiores frequências encontradas, o heap fica assim:
-<div align="center">
-<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/de15ef20-39f3-4be0-8364-93eb9306bb63" width="500px" />
-</div>
-É possível acessar os filhos esquerdo e direito de um nó através das fórmulas 2 * i + 1 e 2 * i + 2, respectivamente.<br>
-Obs: i recebeu o nome de subtree_root_index neste código.
-
-Heapify um único nó leva complexidade de tempo O(log N), onde N é o número total de nós. Portanto, construir todo o Heap levará N operações de heapify e a complexidade de tempo total será O(N*logN).
-
 <h3><b>Regex</b></h3>
 
 A biblioteca de expressões regulares disponibiliza uma classe que representa as próprias expressões regulares, que são uma forma de minilinguagem utilizada para realizar a correspondência de padrões em strings.
@@ -92,6 +78,22 @@ O `std::regex_iterator` é um iterador somente leitura que permite acessar corre
 Durante a construção e em cada incremento, esse iterador chama a função std::regex_search e armazena o resultado (ou seja, guarda uma cópia do valor de std::match_results < BidirIt >). O primeiro objeto desse tipo pode ser lido no momento da construção do iterador ou quando ocorre a primeira operação de desreferenciamento. Caso contrário, a desreferenciação apenas retorna uma cópia da correspondência de expressão regular mais recentemente obtida.
 
 O padrão utilizado na construção do std::regex_iterator representa o indicador do final da sequência. Quando um std::regex_iterator válido é incrementado após ter alcançado a última correspondência (ou seja, quando std::regex_search retorna false), ele se iguala ao iterador que denota o final da sequência.
+
+<h3><b>Heapify_min</b></h3>
+
+O processo heapify_min foi implementado sem a utilização de estrutura pronta. 
+
+`Heapify` é um método de converter um conjunto de valores em um heap. A lógica por trás do algoritmo heapify determinará em que tipo de heap o conjunto de valores se tornará.
+
+Neste algoritmo foi utilizado o heapify_min, que é uma Árvore Binária Completa contendo o menor valor no nó raiz, seguido por valores maiores no próximo nível, seguido por valores ainda maiores no próximo nível e assim por diante. Assim, o último nível desta árvore binária deve conter os maiores valores presentes no array de valores que estamos inserindo. Neste código, um heap é utilizado para armazenar palavras e suas frequências dos K maiores elementos dos textos lidos. No entanto, é importante observar que, entre esses K maiores elementos, o menor deles é mantido no nó raiz. 
+Imagine que o vetor contém as maiores frequências encontradas, o heap fica assim:
+<div align="center">
+<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/de15ef20-39f3-4be0-8364-93eb9306bb63" width="500px" />
+</div>
+É possível acessar os filhos esquerdo e direito de um nó através das fórmulas 2 * i + 1 e 2 * i + 2, respectivamente.<br>
+Obs: "i" recebeu o nome de subtree_root_index neste código.
+
+Heapify um único nó leva complexidade de tempo O(log N), onde N é o número total de nós. Portanto, construir todo o Heap levará N operações de heapify e a complexidade de tempo total será O(N*logN).
 
 
 ## 🔨 Funções 
