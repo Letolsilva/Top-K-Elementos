@@ -81,7 +81,7 @@ O padrão utilizado na construção do std::regex_iterator representa o indicado
 
 <h3><b>Heapify_min</b></h3>
 
-O processo heapify_min foi implementado sem a utilização de estrutura pronta. 
+heapify_min foi implementado sem a utilização de estrutura pronta. 
 
 `Heapify` é um método de converter um conjunto de valores em um heap. A lógica por trás do algoritmo heapify determinará em que tipo de heap o conjunto de valores se tornará.
 
