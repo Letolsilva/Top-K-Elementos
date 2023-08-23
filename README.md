@@ -51,13 +51,17 @@ Visando encontrar uma solução eficiente e rápida para resolução do problema
 
 <h3><b>Unodered_map</b></h3>
 
-`std:unordered_map` é um contêiner associativo que contém pares chave-valor com chaves exclusivas. Pesquisa, inserção e remoção de elementos têm complexidade de tempo constante média. Internamente, os elementos não são classificados em nenhuma ordem específica, mas organizados em baldes. Em qual balde um elemento é colocado depende inteiramente do hash de sua chave. Chaves com o mesmo código hash aparecem no mesmo bucket. Isso permite acesso rápido a elementos individuais, pois uma vez que o hash é calculado, ele se refere ao balde exato em que o elemento é colocado.
+`std:unordered_map` é um contêiner associativo que contém pares chave-valor com chaves exclusivas. Pesquisa, inserção e remoção de elementos têm complexidade de tempo constante média. Internamente, os elementos não são classificados em nenhuma ordem específica, mas organizados em baldes. Em qual balde um elemento é colocado depende inteiramente do hash de sua chave. Chaves com o mesmo código hash aparecem no mesmo bucket. Isso permite acesso rápido a elementos individuais, pois uma vez que o hash é calculado, ele se refere ao balde exato em que o elemento é colocado. Internamente unordered_map é implementado usando Hash Table, a chave fornecida para mapear é hash nos índices de uma tabela hash, e é por isso que o desempenho da estrutura de dados depende muito da função hash, nela se tem o Hashing que refere-se ao processo de gerar uma saída de tamanho fixo a partir de uma entrada de tamanho variável usando as fórmulas matemáticas conhecidas como funções de hash. Esta técnica determina um índice ou local para o armazenamento de um item em uma estrutura de dados.
 
-Neste código emprega se uma tabela de hash para armazenar as palavras e suas frequencias, resultando em inserções e buscas rápidas com complexidade média de O(1). Isso é benéfico quando é crucial, pois torna possível utilizar palavras como chaves para contabilizar suas frequências e acessa-las para obter as top K elementos.
+<div align="center">
+<img src="https://github.com/Letolsilva/Top-K-Elementos/assets/109817570/baf62470-0a98-4279-98b2-541dfe83d17d" width="500px" />
+</div>
 
 A interface engloba uma função bucket_count que opera em tempo constante. Além disso, apresenta outra função chamada bucket_size, cujo desempenho está linearmente relacionado ao tamanho do balde.
 
 Essencialmente, essas características descrevem a implementação do método de tratamento de colisões por encadeamento. Ao adotar o encadeamento de colisões, a satisfação de todos os requisitos torna-se uma tarefa relativamente fácil e direta. A função bucket_count() retorna o número de elementos presentes na estrutura de dados, enquanto a função bucket_size() retorna o número de elementos na lista de colisões associada a cada balde. A obtenção desses valores em tempo constante e linear, respectivamente, é uma operação simples e direta.
+
+Neste código emprega se uma tabela de hash para armazenar as palavras e suas frequencias, resultando em inserções e buscas rápidas com complexidade média de O(1). Isso é benéfico quando é crucial, pois torna possível utilizar palavras como chaves para contabilizar suas frequências e acessa-las para obter as top K elementos.
 
 
 <h3><b>Unodered_set</b></h3>
@@ -81,7 +85,7 @@ O padrão utilizado na construção do std::regex_iterator representa o indicado
 
 <h3><b>Heapify_min</b></h3>
 
-O processo heapify_min foi implementado sem a utilização de estrutura pronta. 
+heapify_min foi implementado sem a utilização de estrutura pronta. 
 
 `Heapify` é um método de converter um conjunto de valores em um heap. A lógica por trás do algoritmo heapify determinará em que tipo de heap o conjunto de valores se tornará.
 
@@ -178,6 +182,8 @@ https://builtin.com/software-engineering-perspectives/heapify-heap-tree-cpp <br>
 https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/ <br>
 https://github.com/mpiress/HeapSort.git <br>
 https://devdojo.com/algonoob/max-heap <br>
+https://www.geeksforgeeks.org/what-is-hashing/<br>
+https://www.geeksforgeeks.org/unordered_map-in-cpp-stl/<br>
 
 ## Contato
 
