@@ -5,7 +5,6 @@
 #include <string>
 #include <chrono>
 #include "topKElementos.hpp"
-
 int numFiles = 2; //Escolha a quantidade de arquivos de entrada
 
 int main() {
