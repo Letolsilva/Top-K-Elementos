@@ -8,24 +8,12 @@
 ![Linguagem](https://img.shields.io/badge/Linguagem-C%2B%2B-blue)
 </div>
 
-## 📌Sumário
-- [Introdução](#Introdução)
-- [Objetivos](#Objetivos)
-- [Arquivos](#Arquivos)
-- [Resolução do Problema](#Resolução-do-problema)
-- [Funções](#Funções)
-- [Resultados](#Resultados)
-- [Conclusão](#Conclusão)
-- [Referências](#Referências)
-- [Compilação e execução](#Compilação-e-execução)
-- [Contato](#Contato)
-
-## ✒️Introdução
+## ✒️ Introdução
 <p align="justify">
 Este programa em C++ foi criado como parte do curso de Algoritmos e Estruturas de Dados I. O objetivo central é encontrar os k elementos mais valiosos dentre um conjunto de dados. Para alcançar essa meta, faz-se uso de tabelas de hash para rastrear a frequência de cada item, enquanto uma estrutura de heap é empregada para gerenciar uma lista dos k palavras mais frequentes no texto de forma eficiente.
 </p>
 
-## 💻Objetivos
+## 💻 Objetivos
 
 O propósito deste projeto é construir uma tabela de dispersão (hash) para registrar a frequência de cada elemento tokenizado na coleção de dados de entrada. Além disso, visa-se criar uma árvore (heap) com capacidade para k elementos mais frequentes no texto.
 
@@ -111,7 +99,8 @@ Heapify um único nó leva complexidade de tempo O(log N), onde N é o número t
 
 - ```Tokenizacao:``` Essa função transforma as linhas do texto em palavras individuais. Para isso, ela aplica o regex para identificar padrões de palavras, incluindo letras, números, apóstrofos, caracteres acentuados e hifens. Durante o processo, a função itera através dos resultados obtidos pelo regex e aplica a funçao ```tratamentos```. Se a palavra resultante não estiver vazia após os tratamentos, ela é convertida para minúsculas e verifica-se se não é uma ```StopWords```. Caso não seja uma, ela é contabilizada no unordered_map chamado ```wordCount```, para posteriormente calcular a frequência das palavras no texto. 
 
-- ```topKWords:``` A função desempenha um papel central na identificação das palavras mais frequentes no texto, usando uma abordagem baseada em heap. Durante a iteração pelo mapa não ordenado chamado `wordCount`, que mantém as palavras e suas contagens, essa função constrói um heap. O objetivo é armazenar os "k" elementos com as maiores contagens. A cada iteração, ela verifica se um novo elemento tem uma contagem maior do que o elemento de menor contagem no heap, e, se essa condição for verdadeira, substitui o elemento mínimo e, em seguida, reorganiza o heap para manter a propriedade de heap. Ao final do processamento, o heap é montado de forma inicial, contendo os "k" elementos de maior contagem, permitindo identificar eficientemente as palavras mais frequentes no texto.
+- ```topKWords:``` A função desempenha um papel central na identificação das palavras mais frequentes no texto, usando uma abordagem baseada em heap. Durante a iteração pelo mapa não ordenado chamado `wordCount`, que mantém as palavras e suas contagens, essa função constrói um heap. Durante a iteração, ele aumenta o tamanho da estrutura topKHeap. Se o tamanho ainda for menor ou igual a k, ele adiciona a entrada atual ao final do vetor vectortopKHeap. Então, ele chama uma função chamada heapify para reorganizar o heap de modo que ele mantenha as propriedades corretas. Se o tamanho da estrutura topKHeap exceder k, o código verifica se a contagem da palavra atual é maior que a contagem da palavra no topo do heap. Se sim, ele substitui a palavra no topo do heap com a palavra atual e chama heapify novamente para manter as propriedades do heap. <br>
+Ao final do processamento, o heap é montado de forma inicial, contendo os "k" elementos de maior contagem, permitindo identificar eficientemente as palavras mais frequentes no texto.
 
 - ```heapify:``` Ela recebe como entrada um vetor de pares representando palavras e suas contagens, o tamanho do heap (n) e o índice da raiz da subárvore sendo analisada. A função compara as contagens dos elementos presentes no índice da raiz e seus filhos esquerdo e direito, identificando o menor entre eles. Se o menor não for a raiz da subárvore, a função troca os elementos e chama recursivamente heapify na subárvore afetada, assegurando que a hierarquia e a propriedade de heap mínima sejam mantidas em toda a estrutura. 
 
