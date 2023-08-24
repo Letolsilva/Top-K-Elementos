@@ -45,6 +45,7 @@ Visando encontrar uma solução eficiente e rápida para resolução do problema
 <img src="https://github.com/Letolsilva/Top-K-Elementos/assets/109817570/baf62470-0a98-4279-98b2-541dfe83d17d" width="500px" />
 </div>
 
+<br>
 A interface engloba uma função bucket_count que opera em tempo constante. Além disso, apresenta outra função chamada bucket_size, cujo desempenho está linearmente relacionado ao tamanho do balde.
 
 Essencialmente, essas características descrevem a implementação do método de tratamento de colisões por encadeamento. Ao adotar o encadeamento de colisões, a satisfação de todos os requisitos torna-se uma tarefa relativamente fácil e direta. A função bucket_count() retorna o número de elementos presentes na estrutura de dados, enquanto a função bucket_size() retorna o número de elementos na lista de colisões associada a cada balde. A obtenção desses valores em tempo constante e linear, respectivamente, é uma operação simples e direta.
@@ -64,6 +65,8 @@ A biblioteca de expressões regulares disponibiliza uma classe que representa as
 
 Uma "expressão regular", também conhecida como `regex`, é uma sequência específica de caracteres que define um padrão de pesquisa. Isso pode ser empregado em algoritmos de busca, localização ou substituição de strings, entre outras aplicações. Expressões regulares também são utilizadas para validar entradas.
 
+No código, o regex foi empregado para preservar os caracteres que tenho interesse em que sejam reconhecidos nas palavras. 
+
 Os iteradores regex são usados ​​para percorrer todo o conjunto de correspondências de expressões regulares encontradas em uma sequência.
 O `std::regex_iterator` é um iterador somente leitura que permite acessar correspondências individuais de uma expressão regular dentro de uma sequência de caracteres. 
 
@@ -77,7 +80,7 @@ heapify_min foi implementado sem a utilização de estrutura pronta.
 
 `Heapify` é um método de converter um conjunto de valores em um heap. A lógica por trás do algoritmo heapify determinará em que tipo de heap o conjunto de valores se tornará.
 
-Neste algoritmo foi utilizado o heapify_min, que é uma Árvore Binária Completa contendo o menor valor no nó raiz, seguido por valores maiores no próximo nível, seguido por valores ainda maiores no próximo nível e assim por diante. Assim, o último nível desta árvore binária deve conter os maiores valores presentes no array de valores que estamos inserindo. Neste código, um heap é utilizado para armazenar palavras e suas frequências dos K maiores elementos dos textos lidos. No entanto, é importante observar que, entre esses K maiores elementos, o menor deles é mantido no nó raiz. 
+Neste algoritmo foi utilizado o heapify_min, que é uma Árvore Binária Completa contendo o menor valor no nó raiz, seguido por valores maiores no próximo nível, seguido por valores ainda maiores no próximo nível e assim por diante. Assim, o último nível desta árvore binária deve conter os maiores valores presentes no array de valores que estamos inserindo. Neste código, um heap é utilizado para armazenar palavras e suas frequências dos K maiores elementos dos textos lidos. No entanto, é importante observar que, entre esses K maiores elementos, o menor deles é mantido no nó raiz.
 Imagine que o vetor contém as maiores frequências encontradas, o heap fica assim:
 <div align="center">
 <img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/de15ef20-39f3-4be0-8364-93eb9306bb63" width="500px" />
@@ -85,8 +88,7 @@ Imagine que o vetor contém as maiores frequências encontradas, o heap fica ass
 É possível acessar os filhos esquerdo e direito de um nó através das fórmulas 2 * i + 1 e 2 * i + 2, respectivamente.<br>
 Obs: "i" recebeu o nome de subtree_root_index neste código.
 
-Heapify um único nó leva complexidade de tempo O(log N), onde N é o número total de nós. Portanto, construir todo o Heap levará N operações de heapify e a complexidade de tempo total será O(N*logN).
-
+Heapify um único nó leva complexidade de tempo O(log K), onde K é o número total de nós. Portanto, construir todo o Heap levará N operações de heapify e a complexidade de tempo total será O(N*log K).
 
 ## 🔨 Funções 
 <div align="justify">
