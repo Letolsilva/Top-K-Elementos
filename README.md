@@ -66,7 +66,7 @@ Neste código emprega se uma tabela de hash para armazenar as palavras e suas fr
 
 <h3><b>Unodered_set</b></h3>
 
-`std::unordered_set` é um contêiner associativo que contém um conjunto de objetos exclusivos do tipo Key. Pesquisa, inserção e remoção têm complexidade de tempo constante média. Internamente, os elementos não são classificados em nenhuma ordem específica, mas organizados em baldes. Em qual balde um elemento é colocado depende inteiramente do hash de seu valor. Isso permite acesso rápido a elementos individuais, pois uma vez que um hash é calculado, ele se refere ao balde exato em que o elemento é colocado.
+`std::unordered_set` é um contêiner associativo que contém um conjunto de objetos exclusivos do tipo Key. Pesquisa, inserção e remoção têm complexidade de tempo constante média. Internamente, os elementos não são classificados em nenhuma ordem específica, mas organizados em baldes. Em qual balde um elemento é colocado depende inteiramente do hash de seu valor. Isso permite acesso rápido a elementos individuais, pois uma vez que um hash é calculado, ele se refere ao balde exato em que o elemento é colocado. O unordered_set é implementado como tabelas de hash.
 
 Os elementos do contêiner não podem ser modificados (mesmo por não const iteradores), pois a modificação pode alterar o hash de um elemento e corromper o contêiner. Portanto, optou-se por armazenar as stopWords, que foram carregadas de um arquivo de texto. Essa abordagem permite uma comparação otimizada para determinar se palavras são stopwords ou não. Isso se deve ao fato de que todas as operações no unordered_set têm uma complexidade de tempo constante em média (O(1)), embora em casos extremos possam chegar a uma complexidade de tempo linear (O(n)).
 
@@ -134,12 +134,12 @@ Configurando para ler apenas um arquivo usando a variável ```numFiles``` e a va
 
 <h3><b>Saída</b></h3>
 <div align="center">
-<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/b27e321f-c84b-4907-9d3d-816240d57293" width="500px" />
+<img src="https://github.com/Letolsilva/Top-K-Elementos/assets/109817570/767c2b1d-6584-4067-ae34-be9486b21c44" width="300px" />
 </div>
 
 <h3><b>Saída com os dois textos fornecidos como testes</b></h3>
 <div align="center">
-<img src="https://github.com/Letolsilva/AEDS---Caminho-guloso/assets/109817570/61cad8ff-77ca-4b37-9b3c-0e6a06edfd84" width="500px" />
+<img src="https://github.com/Letolsilva/Top-K-Elementos/assets/109817570/dd912173-40ca-4650-a581-82cb62b66faf" width="300px" />
 </div>
 A saída obtida é resultado da fusão das palavras mais comuns encontradas nos textos "Dom Casmurro" e "A semana Texto-fonte: Obra Completa de Machado de Assis", ambos fornecidos como entradas de teste pelo professor e presentes nos arquivos "input1.txt" e "input2.txt", localizados na pasta data deste código.<br>
 
@@ -155,13 +155,13 @@ O código foi executado em um notebook Acer Nitro 5 com processador Ryzen 7.
 
 
 ## ✔️Conclusão
-Foi observado, um novo metodo mais otimizado para busca e pesquisa em textos e que podem ser tambem aplicado em diversas outras situações. Entender sobre o heap que tende a utilizar estruturas abstratas de dados cujas ações o permitem definir uma hierarquia em árvore dos elementos armazenados, e acessa-los de forma rápida. Além disso, consegui iniciar minha compreensão das estruturas de árvores e também apliquei no algoritmo outros conhecimentos que desenvolvi. Introduzi novas funções e estruturas que me proporcionaram abordagens mais avançadas para realizar as mesmas tarefas.
+Conheci um método otimizado para busca e pesquisa em textos, com aplicações potenciais em várias outras situações. Ao compreender o conceito de heap e suas interações com estruturas abstratas de dados, pude estabelecer uma hierarquia em árvore para os elementos armazenados, permitindo um acesso eficiente a eles. Além disso, aprendi mais sobre estruturas de árvores e apliquei esses conhecimentos no algoritmo. Descobri também novas funções e estruturas que contribuiu para este código, possibilitando a execução de tarefas já conhecidas e abordadas mas desta vez de forma mais avançada.
 
 ## 🚨Importante
 
 - Antes de compilar o código, é essencial definir dois parâmetros no arquivo main.cpp localizados no início do código: o valor de `k` (linha 12), que representa o tamanho do heap, e o número de arquivos que serão lidos numFiles (linha 8). 
 
-- Certifique-se de ter os textos desejados armazenados na pasta data, nomeados como input(numero do arquivo).txt, sendo que o número do arquivo deve começar a partir de 1 e incrementar sequencialmente. Na pasta main, escolha o número adequado de arquivos a serem lidos.
+- Certifique-se de ter os textos desejados armazenados na pasta data, nomeados como input(número do arquivo).txt, sendo que o número do arquivo deve começar a partir de 1 e incrementar sequencialmente. Na pasta main, escolha o número adequado de arquivos a serem lidos.
 
 - O programa fornecerá uma única saída, apresentando as palavras mais frequentes encontradas nos arquivos especificados pelo parâmetro numFiles. Isso permitirá uma análise eficiente das palavras mais recorrentes nos textos fornecidos.
 
